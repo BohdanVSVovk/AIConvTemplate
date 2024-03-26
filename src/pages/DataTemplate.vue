@@ -49,7 +49,7 @@ import DataTemplatePanel from "../components/DataTemplatePanel.vue";
 import SkuMatchForm from "../components/dataTemplate/SkuMatchForm.vue";
 import InputFileOne from "../components/dataTemplate/InputFileOne.vue";
 import InputFileTwo from "../components/dataTemplate/InputFileTwo.vue";
-import OutputFileOne from "../components/dataTemplate/outputFileOne.vue";
+import OutputFileOne from "../components/dataTemplate/OutputFileOne.vue";
 import OutputFileTwo from "../components/dataTemplate/OutputFileTwo.vue";
 import ProcessButtonGroup from '../components/dataTemplate/ProcessButtonGroup.vue'
 export default {
