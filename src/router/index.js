@@ -5,7 +5,7 @@ import Dashboard from '../pages/Dashboard.vue';
 import SelectUtility from '../pages/SelectUtility.vue';
 import DataTemplate from '../pages/DataTemplate.vue'
 import Login from '../pages/core/Login.vue';
-import Settings from '../pages/Settings.Vue';
+import Settings from '../pages/Settings.vue';
 import Error from '../pages/core/Error.vue';
 
 
