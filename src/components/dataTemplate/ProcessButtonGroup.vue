@@ -2,10 +2,7 @@
     <div class="text-xs-center">
         <v-btn
         round 
-      :loading="loading4"
-      :disabled="loading4"
       color="info"
-      @click="loader = 'loading4'"
     >
       Process Sample File
       <template v-slot:loader>
@@ -16,10 +13,7 @@
     </v-btn>
     <v-btn
     round 
-      :loading="loading4"
-      :disabled="loading4"
       color="info"
-      @click="loader = 'loading4'"
     >
       Process Complete File
       <template v-slot:loader>

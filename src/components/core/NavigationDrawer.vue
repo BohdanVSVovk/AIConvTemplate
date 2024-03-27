@@ -114,7 +114,6 @@ export default {
       const vm = this;
 
       vm.selectedIndex = selectedIndex;
-      console.log(this.$store)
       this.$store.commit('updateProject', projectName);
       return vm.$router.push({ name: routeName });
     }

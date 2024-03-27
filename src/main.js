@@ -24,11 +24,20 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     selectedProject: 'Project',
+    initialSettingValue: 0
   },
   mutations: {
     updateProject(state, projectName) {
-      console.log(projectName);
       state.selectedProject = projectName;
+    },
+    increaseSettingValue(state) {
+      state.initialSettingValue++
+    },
+    decreaseSettingValue(state) {
+      state.initialSettingValue--
+    },
+    setSettingValue(state, newValue) {
+      state.initialSettingValue = newValue
     },
   }
 });

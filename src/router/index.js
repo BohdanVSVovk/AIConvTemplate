@@ -35,7 +35,7 @@ export default new Router({
       }
     },
     {
-      path: '/data-template',
+      path: '/data-template/:id',
       name: 'DataTemplate',
       component: DataTemplate,
     },
