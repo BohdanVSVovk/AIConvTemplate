@@ -2,7 +2,7 @@
   <v-toolbar app>
     <v-toolbar-title>
       <v-toolbar-side-icon @click="toggleNavigationBar"></v-toolbar-side-icon>
-      Project
+      {{ $store.state.selectedProject }}
     </v-toolbar-title>
 
     <v-spacer></v-spacer> <!-- Add a spacer to push buttons to the right -->
@@ -11,7 +11,7 @@
         <v-icon dark left>check_circle</v-icon>
         Filter
       </v-btn>
-    <v-btn depressed color="primary">Process Selected Data</v-btn>
+    <v-btn depressed @click="changeRoute('SelectUtility', 2)" color="primary">Process Selected Data</v-btn>
   </v-toolbar>
 </template>
 <script>
@@ -129,6 +129,14 @@ export default {
       const vm = this;
 
       vm.$emit('toggleNavigationBar');
+    },
+
+    changeRoute(routeName, selectedIndex) {
+      const vm = this;
+
+      vm.selectedIndex = selectedIndex;
+
+      return vm.$router.push({ name: routeName });
     },
 
     setUpSettings() {

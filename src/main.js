@@ -18,6 +18,20 @@ import './styles/global.css';
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+const store = new Vuex.Store({
+  state: {
+    selectedProject: 'Project',
+  },
+  mutations: {
+    updateProject(state, projectName) {
+      console.log(projectName);
+      state.selectedProject = projectName;
+    },
+  }
+});
 
 Vue.use(VueAxios, axios);
 // Make BootstrapVue available throughout your project
@@ -51,6 +65,7 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  store,
   components: { App },
   template: '<App/>',
   data: {

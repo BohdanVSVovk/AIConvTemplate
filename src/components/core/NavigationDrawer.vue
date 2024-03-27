@@ -23,21 +23,21 @@
             </template>
             <v-list-tile-title class="item-title">{{ $t('Open projects') }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('SelectUtility', 2)">
+          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 1')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
             <v-list-tile-title :class="[{ 'active': selectedIndex === 4 }, 'item-title']">{{ $t('Project 1')
               }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('SelectUtility', 2)">
+          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 2')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
             <v-list-tile-title :class="[{ 'active': selectedIndex === 5 }, 'item-title']">{{ $t('Project 2')
               }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('SelectUtility', 2)">
+          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 3')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
@@ -53,7 +53,7 @@
             </template>
             <v-list-tile-title class="item-title">{{ $t('Closed projects') }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('SelectUtility', 2)">
+          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 1')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
@@ -67,7 +67,7 @@
         <!-- List items -->
         <v-footer app>
           <v-layout align-start row>
-              <div class="text-md-center pb-3 cursor-grab" @click="changeRoute('Settings', 4)">
+              <div class="text-md-center pb-3 cursor-grab" @click="changeRoute('Settings', 4, 'Settings')">
                 <span class="black--text pr-5" >Settings</span>
                 <img src='../../assets/svgs/SettingIcon.svg' />
               </div>
@@ -86,6 +86,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
+
 export default {
   props: {
     toggle: {
@@ -103,13 +106,16 @@ export default {
       ]
     }
   },
-
+  computed: {
+    ...mapState(['selectedProject']),
+  },
   methods: {
-    changeRoute(routeName, selectedIndex) {
+    changeRoute(routeName, selectedIndex , projectName) {
       const vm = this;
 
       vm.selectedIndex = selectedIndex;
-
+      console.log(this.$store)
+      this.$store.commit('updateProject', projectName);
       return vm.$router.push({ name: routeName });
     }
   }

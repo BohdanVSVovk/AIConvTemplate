@@ -13,7 +13,7 @@
       <tbody>
         <tr v-for="item in items" :key="item.id">
           <td>
-            <input type="checkbox" v-model="selected" :value="item.name">
+            <input type="checkbox" v-model="selected" :value="item.id">
           </td>
           <td>{{ item.name }}</td>
           <td>{{ item.location }}</td>
