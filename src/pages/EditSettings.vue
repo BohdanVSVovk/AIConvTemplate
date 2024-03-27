@@ -32,7 +32,7 @@
                             <div class="font-weight-bold">1</div>
                         </v-flex>
                         <v-flex xs12 sm4>
-                            <v-btn round color="primary" @click="changeRoute('EditSettings', 5)">Manage Prompt</v-btn>
+                            <v-btn round color="primary" @click="changeRoute('ManagePrompt', 6)">Manage Prompt</v-btn>
                         </v-flex>
                         <v-divider></v-divider>
                     </v-layout>

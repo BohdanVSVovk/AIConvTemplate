@@ -6,6 +6,7 @@ import SelectUtility from '../pages/SelectUtility.vue';
 import DataTemplate from '../pages/DataTemplate.vue'
 import Login from '../pages/core/Login.vue';
 import Settings from '../pages/Settings.vue';
+import ManagePrompt from '../pages/ManagePrompt.vue';
 import Error from '../pages/core/Error.vue';
 import EditSettings from '../pages/EditSettings.vue'
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/settings/edit',
       name: 'EditSettings',
       component: EditSettings,
+    },
+    {
+      path: '/settings/edit/manage-prompt',
+      name: 'ManagePrompt',
+      component: ManagePrompt,
     },
     {
       path: '/login',
