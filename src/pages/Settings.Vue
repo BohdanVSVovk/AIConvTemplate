@@ -1,83 +1,59 @@
 <template>
     <div>
-        <div class="darken-2 text-xs-center mt-5">
-        <span class="black--text title">Setting</span>
-        </div>
         <div class="darken-2 text-xs-center mt-3">
-        <span class="black--text headline">Akeneo Template 1 settings</span>
+        <span class="black--text headline">Data Template Utility Setting</span>
         </div>
         <div class="m-5">
             <v-form>
                 <v-container>
                     <v-layout row wrap>
 
+                        <v-flex xs12 class="d-flex align-center blue lighten-3">
+                            <div class="font-weight-bold">Template Name</div>
+                        </v-flex>
+                        <v-divider ></v-divider>
+                    </v-layout>
+                </v-container>
+                
+                <v-container>
+                    <v-layout row wrap>
+
+                        <v-flex xs12 sm6 class="d-flex align-center">
+                            <div class="font-weight-bold">Akeneo Template 1</div>
+                        </v-flex>
                         <v-flex xs12 sm6>
+                            <v-btn round color="primary" @click="changeRoute('EditSettings', 5)">Edit</v-btn>
+                        </v-flex>
+                        <v-divider></v-divider>
+                    </v-layout>
+                </v-container>
+                <v-container>
+                    <v-layout row wrap>
+                        <v-flex xs12 sm6 class="d-flex align-center">
                             <div class="font-weight-bold">Columns</div>
-                            <v-text-field
-                                v-model="first"
-                                label="First Name"
-                                solo
-                            ></v-text-field>
                         </v-flex>
-
-
                         <v-flex xs12 sm6>
-                            <div class="font-weight-bold">Brands</div>
-                            <v-text-field
-                                v-model="first"
-                                label="First Name"
-                                solo
-                            ></v-text-field>
+                            <v-btn round color="primary">Edit</v-btn>
                         </v-flex>
+                        <v-divider></v-divider>
                     </v-layout>
                 </v-container>
                 <v-container>
                     <v-layout row wrap>
 
-                        <v-flex xs12 sm6>
-                            <div class="font-weight-bold">Name</div>
-                            <v-text-field
-                                v-model="first"
-                                label="First Name"
-                                solo
-                            ></v-text-field>
+                        <v-flex xs12 sm6 class="d-flex align-center">
+                            <div class="font-weight-bold">Columns</div>
                         </v-flex>
 
 
                         <v-flex xs12 sm6>
-                            <div class="font-weight-bold">Specifications</div>
-                            <v-text-field
-                                v-model="first"
-                                label="First Name"
-                                solo
-                            ></v-text-field>
+                            <v-btn round color="primary">Edit</v-btn>
                         </v-flex>
+                        <v-divider></v-divider>
                     </v-layout>
                 </v-container>
-                <v-container>
-                    <v-layout row wrap>
-                            <div class="font-weight-bold">Add prompts- 1</div>
-                            <v-flex xs8>
-                                <v-textarea
-                                solo
-                                name="input-7-4"
-                                label="Solo textarea"
-                                value="Prompt"
-                                ></v-textarea>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-flex xs12 sm4 text-xs-center>
-                                        <div>
-                                            <v-btn color="primary">Save prompts</v-btn>
-                                        </div>
-                                        <div>
-                                            <v-btn min-width='150px'>Add More</v-btn>
-                                        </div>
-                                    </v-flex>
-                            </v-flex>
-                    </v-layout>
-                    
-                </v-container>
+                
+                
             </v-form>
         </div>
         
@@ -89,6 +65,14 @@
     data: () => ({
       first: '',
       last: ''
-    })
+    }),
+    methods: {
+    changeRoute(routeName, selectedIndex) {
+      const vm = this;
+
+      vm.selectedIndex = selectedIndex;
+      return vm.$router.push({ name: routeName });
+    }
+  }
   }
 </script>

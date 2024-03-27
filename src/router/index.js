@@ -7,7 +7,7 @@ import DataTemplate from '../pages/DataTemplate.vue'
 import Login from '../pages/core/Login.vue';
 import Settings from '../pages/Settings.vue';
 import Error from '../pages/core/Error.vue';
-
+import EditSettings from '../pages/EditSettings.vue'
 
 
 Vue.use(Router);
@@ -43,6 +43,11 @@ export default new Router({
       path: '/settings',
       name: 'Settings',
       component: Settings,
+    },
+    {
+      path: '/settings/edit',
+      name: 'EditSettings',
+      component: EditSettings,
     },
     {
       path: '/login',
