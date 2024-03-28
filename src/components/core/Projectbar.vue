@@ -2,16 +2,13 @@
   <v-toolbar app>
     <v-toolbar-title>
       <v-toolbar-side-icon @click="toggleNavigationBar"></v-toolbar-side-icon>
-      {{ $store.state.selectedProject }}
+      Files
     </v-toolbar-title>
 
     <v-spacer></v-spacer> <!-- Add a spacer to push buttons to the right -->
 
-      <v-btn >
-        <v-icon dark left>check_circle</v-icon>
-        Filter
-      </v-btn>
-    <v-btn depressed @click="changeRoute('SelectUtility', 2)" color="primary">Process Selected Data</v-btn>
+    <b-button class="mr-2" variant="primary">Upload File</b-button>
+    <b-button @click="changeRoute('SelectUtility', 2)" variant="primary">Process Selected Data</b-button>
   </v-toolbar>
 </template>
 <script>

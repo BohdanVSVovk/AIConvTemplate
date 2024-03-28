@@ -4,16 +4,6 @@
       <v-flex d-flex lg12 sm6 xs12>
         <data-table/>
       </v-flex>
-      <v-flex d-flex lg4 sm6 xs12>
-        <time-line />
-      </v-flex>
-      <!-- DataTable&TimeLine Ends -->
-      <v-flex d-flex lg6 sm6 xs12>
-        <stepper/>
-      </v-flex>
-      <v-flex d-flex lg6 sm6 xs12>
-        <user-tree-view />
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
