@@ -70,6 +70,7 @@
                                     label="Solo textarea"
                                     value="Arunav Rahul"
                                     ></v-text-field>
+                                    
                                 </v-flex>
                                 <div class="font-weight-bold">Prompt Discription</div>
                                 <v-flex xs12>
