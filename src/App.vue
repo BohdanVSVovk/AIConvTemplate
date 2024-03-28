@@ -6,6 +6,9 @@
           <div v-if="$route.path === '/'">
             <toolbar @toggleNavigationBar="drawer = !drawer"/>
           </div>
+          <div v-if="$route.path === '/file-project'">
+            <projectbar @toggleNavigationBar="drawer = !drawer"/>
+          </div>
           <navigation :toggle="drawer"/>
           <v-content>
             <router-view/>

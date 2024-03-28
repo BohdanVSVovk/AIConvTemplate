@@ -2,7 +2,7 @@
   <v-container fluid grid-list-xl>
     <v-layout row wrap>
       <v-flex d-flex lg12 sm6 xs12>
-        <project-table/>
+        <data-table/>
       </v-flex>
       <v-flex d-flex lg4 sm6 xs12>
         <time-line />

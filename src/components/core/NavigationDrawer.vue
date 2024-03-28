@@ -23,21 +23,21 @@
             </template>
             <v-list-tile-title class="item-title">{{ $t('Open projects') }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 1')">
+          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 1')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
             <v-list-tile-title :class="[{ 'active': selectedIndex === 4 }, 'item-title']">{{ $t('Project 1')
               }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 2')">
+          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 2')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
             <v-list-tile-title :class="[{ 'active': selectedIndex === 5 }, 'item-title']">{{ $t('Project 2')
               }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 3')">
+          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 3')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>
@@ -53,7 +53,7 @@
             </template>
             <v-list-tile-title class="item-title">{{ $t('Closed projects') }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('Dashboard', 1, 'Project 1')">
+          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 1')">
             <v-list-tile-action>
               <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
             </v-list-tile-action>

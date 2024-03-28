@@ -1,5 +1,6 @@
 // Core Components
 import Toolbar from '../components/core/Toolbar.vue';
+import Projectbar from '../components/core/Projectbar.vue';
 import Navigation from '../components/core/NavigationDrawer.vue';
 import Breadcrumbs from '../components/core/Breadcrumbs.vue';
 import PageFooter from '../components/core/PageFooter.vue';
@@ -7,6 +8,7 @@ import PageFooter from '../components/core/PageFooter.vue';
 import Widget from '../components/Widget.vue';
 import SocialWidget from '../components/SocialWidget.vue';
 import DataTable from '../components/DataTable.vue';
+import ProjectTable from '../components/ProjectTable.vue';
 import TimeLine from '../components/TimeLine.vue';
 import UserTreeView from '../components/UserTreeView.vue';
 import Stepper from '../components/Stepper.vue';
@@ -18,11 +20,13 @@ import TotalEarningsStatistic from '../components/statistics/TotalEarningsStatis
 function setupComponents(Vue){
 
   Vue.component('toolbar', Toolbar);
+  Vue.component('projectbar', Projectbar);
   Vue.component('navigation', Navigation);
   Vue.component('breadcrumbs', Breadcrumbs);
   Vue.component('page-footer', PageFooter);
   Vue.component('widget', Widget);
   Vue.component('social-widget', SocialWidget);
+  Vue.component('project-table', ProjectTable);
   Vue.component('data-table', DataTable);
   Vue.component('time-line', TimeLine);
   Vue.component('user-tree-view', UserTreeView);

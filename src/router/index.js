@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import ProjectFile from '../pages/ProjectFile.vue';
 import Dashboard from '../pages/Dashboard.vue';
 import SelectUtility from '../pages/SelectUtility.vue';
 import DataTemplate from '../pages/DataTemplate.vue'
@@ -54,6 +55,11 @@ export default new Router({
       path: '/settings/edit/manage-prompt',
       name: 'ManagePrompt',
       component: ManagePrompt,
+    },
+    {
+      path: '/file-project',
+      name: 'FilePerProject',
+      component: ProjectFile
     },
     {
       path: '/login',

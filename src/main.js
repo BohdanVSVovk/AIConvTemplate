@@ -3,16 +3,16 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-
-import 'vuetify/dist/vuetify.min.css';
-import 'font-awesome/css/font-awesome.css';
-
 import Vuetify from 'vuetify';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vuetify/dist/vuetify.min.css';
+import 'font-awesome/css/font-awesome.css';
+
+
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import './styles/global.css';
 
