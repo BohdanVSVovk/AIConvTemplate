@@ -57,7 +57,7 @@ export default new Router({
       component: ManagePrompt,
     },
     {
-      path: '/file-project',
+      path: '/file-project/:id',
       name: 'FilePerProject',
       component: ProjectFile
     },

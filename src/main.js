@@ -24,11 +24,15 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     selectedProject: 'Project',
-    initialSettingValue: 0
+    initialSettingValue: 0,
+    projectLists: []
   },
   mutations: {
     updateProject(state, projectName) {
       state.selectedProject = projectName;
+    },
+    updateProjectList(state, newProjectList) {
+      state.projectLists = newProjectList;
     },
     increaseSettingValue(state) {
       state.initialSettingValue++

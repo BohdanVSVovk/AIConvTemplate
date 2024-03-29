@@ -16,9 +16,9 @@
             <input type="checkbox" v-model="selected" :value="item.id">
           </td>
           <td>{{ item.name }}</td>
-          <td>{{ item.location }}</td>
-          <td>{{ item.height }}</td>
-          <td><img src="../assets/svgs/ExcelIcon.svg" alt="SVG Icon"></td>
+          <td>{{ item.source }}</td>
+          <td>{{ item.notes }}</td>
+          <td v-if="item.file_type == 'excel' "><img src="../assets/svgs/ExcelIcon.svg" alt="SVG Icon"></td>
         </tr>
       </tbody>
     </table>
@@ -44,23 +44,33 @@ export default {
           location: 'File Name',
           height: 'File Name',
           base: 'File Name',
-        },
-        {
-          id: 3,
-          name: 'File Name',
-          location: 'File Name',
-          height: 'File Name',
-          base: 'File Name',
-        },
-        {
-          id: 4,
-          name: 'File Name',
-          location: 'File Name',
-          height: 'File Name',
-          base: 'File Name',
-        },
+        }
       ]
     };
+  },
+  mounted() {
+    console.log("router params")
+    console.log(this.$route.params.id)
+    fetch(process.env.ROOT_API + '/project/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: this.$route.params.id })
+      })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data)
+        this.items = data.project_files
+      })
+      .catch((error) => {
+        throw new Error('Error! Could not reach the API. Status: ' + error.response.status + ', Message: ' + error.response.data.message);
+      })
   }
 }
 </script>

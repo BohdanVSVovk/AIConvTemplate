@@ -24,7 +24,22 @@ export default {
     return {
       lorem: `Lorem ipsum dolor sit amet, mel at clita quando.`
     }
-  }
+  },
+  mounted() {
+      fetch(process.env.ROOT_API + '/project/')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.$store.commit('updateProjectList', data.projects);
+      })
+      .catch((error) => {
+        throw new Error('Error! Could not reach the API. ' + error);
+      })
+}
 }
 </script>
 
