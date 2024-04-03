@@ -49,8 +49,6 @@ export default {
     };
   },
   mounted() {
-    console.log("router params")
-    console.log(this.$route.params.id)
     fetch(process.env.ROOT_API + '/project/', {
         method: 'POST',
         headers: {
@@ -65,7 +63,6 @@ export default {
         return res.json();
       })
       .then((data) => {
-        console.log(data)
         this.items = data.project_files
       })
       .catch((error) => {

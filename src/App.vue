@@ -4,9 +4,9 @@
       <v-app id="inspire">
         <div class="app-container">
           <div v-if="$route.path === '/'">
-            <toolbar @toggleNavigationBar="drawer = !drawer"/>
+            <toolbar @toggleNavigationBar="drawer = !drawer" :RightButton="newProjectButton" :textContent="'Project'"/>
           </div>
-          <div v-if="$route.path === '/file-project'">
+          <div v-if="isFileProjectRoute">
             <projectbar @toggleNavigationBar="drawer = !drawer"/>
           </div>
           <navigation :toggle="drawer"/>
@@ -28,11 +28,18 @@
 </template>
 
 <script>
+import NewProjectR from './components/basic/buttons/NewProjectR.vue';
 export default {
   name: 'App',
   data() {
     return {
-      drawer: true
+      drawer: true,
+      newProjectButton: NewProjectR
+    }
+  },
+  computed: {
+    isFileProjectRoute() {
+      return this.$route.path.includes('/file-project/');
     }
   }
 }

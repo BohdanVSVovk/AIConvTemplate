@@ -3,13 +3,13 @@
     <v-navigation-drawer location="left" v-model="toggle" fixed app>
       <v-layout column>
       <v-list>
-        <v-list-tile v-for="item in items" :key="item.title" avatar @click="">
+        <v-list-tile avatar @click="">
           <v-list-tile-avatar @click="changeRoute('Dashboard', 1)">
-            <img :src="item.avatar">
+            <img :src="'https://cdn.vuetifyjs.com/images/lists/4.jpg'">
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title v-html="item.title"></v-list-tile-title>
-            <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+            <v-list-tile-title v-html="'Cindy Baker'"></v-list-tile-title>
+            <v-list-tile-sub-title v-html="'Admin'"></v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -17,33 +17,22 @@
       <v-list>
         <v-list-group>
 
-          <v-list-tile slot="activator">
+          <v-list-tile  slot="activator">
             <template v-slot:prepend>
               <img src="../../assets/svgs/OpenProject.svg" alt="Open Project Icon" style="margin-right: 15px;">
             </template>
             <v-list-tile-title class="item-title">{{ $t('Open projects') }}</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 1')">
-            <v-list-tile-action>
-              <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
-            </v-list-tile-action>
-            <v-list-tile-title :class="[{ 'active': selectedIndex === 4 }, 'item-title']">{{ $t('Project 1')
-              }}</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 2')">
-            <v-list-tile-action>
-              <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
-            </v-list-tile-action>
-            <v-list-tile-title :class="[{ 'active': selectedIndex === 5 }, 'item-title']">{{ $t('Project 2')
-              }}</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile @click="changeRoute('FilePerProject', 7, 'Project 3')">
-            <v-list-tile-action>
-              <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
-            </v-list-tile-action>
-            <v-list-tile-title :class="[{ 'active': selectedIndex === 6 }, 'item-title']">{{ $t('Project 3')
-              }}</v-list-tile-title>
-          </v-list-tile>
+          <v-list v-if="items.length > 0">
+            <v-list-tile v-for="item in items" v-if="item['project_name'] !== undefined" :key="item.id" @click="handleProjectLink(item)">
+              <v-list-tile-action>
+                <img src="../../assets/svgs/ListProject.svg" alt="Open Project Icon">
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title :class="[selectedIndex === 4 ? 'active' : '', 'item-title']">{{ item.project_name }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
         </v-list-group>
 
         <v-list-group>
@@ -106,17 +95,35 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.$store.watch(
+      state => state.projectLists,
+      (newProjectLists) => {
+        this.items = newProjectLists;
+        console.log(newProjectLists);
+      }
+    );
+  },
   computed: {
     ...mapState(['selectedProject']),
   },
   methods: {
+    
     changeRoute(routeName, selectedIndex , projectName) {
       const vm = this;
 
       vm.selectedIndex = selectedIndex;
       this.$store.commit('updateProject', projectName);
       return vm.$router.push({ name: routeName });
-    }
+    },
+    handleProjectLink(item) {
+        // Handle row click event here
+        try {
+          this.$router.push({ name: 'FilePerProject', params: { id: item.no } });
+        } catch (error) {
+          console.error('Error navigating to file-project:', error);
+        }
+      }
   }
 }
 </script>
