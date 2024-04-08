@@ -27,7 +27,8 @@ const store = new Vuex.Store({
     initialSettingValue: 0,
     projectLists: [],
     processable_data:[],
-    fileOrderArray:[]
+    fileOrderArray:[],
+    inputSettings:[]
   },
   mutations: {
     updateProject(state, projectName) {
@@ -41,6 +42,17 @@ const store = new Vuex.Store({
     },
     updateProjectList(state, newProjectList) {
       state.projectLists = newProjectList;
+    },
+    updateInputSettings(state, inputSettings) {
+      let index = state.inputSettings.findIndex(item => item.order === inputSettings.order);
+    
+      if (index !== -1) {
+        // Replace item at index using native splice
+        state.inputSettings.splice(index, 1, inputSettings);
+      } else {
+        // Add new item if it does not exist in state.inputSettings
+        state.inputSettings.push(inputSettings);
+      }
     },
     increaseSettingValue(state) {
       state.initialSettingValue++

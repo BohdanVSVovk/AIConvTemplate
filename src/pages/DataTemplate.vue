@@ -15,7 +15,7 @@
     <div class="darken-2 text-xs-center">
       <span class="black--text display-1">Data Template Utility</span>
     </div>
-    <div class="darken-2 text-xs-center" v-if="id !== 4">
+    <div class="darken-2 text-xs-center" v-if="id !== lastId">
       <span class="black--text display-1">Input file settings</span>
     </div>
     <v-container>
@@ -41,21 +41,15 @@
       <div class="darken-2 text-xs-center">
         <span class="black--text display-1">Output file settings</span>
       </div>
-      <v-container>
-        <DataTemplatePanel 
-        :dynamicComponent="OutputFileOne" 
-        title="Brand (Column 1)" 
-        :order="9"
-        :componentProps="{order: 9}"/>
-      </v-container>
-      <v-container>
-        <DataTemplatePanel 
-        :dynamicComponent="OutputFileTwo" 
-        title="MNP (Column 2)"
-        :order="10"
-        :componentProps="{order: 10}"
-        />
-      </v-container>
+      <div v-for="(m, index) in 3" :key="m">
+        <v-container>
+          <DataTemplatePanel 
+            :dynamicComponent="OutputFileOne" 
+            :title="getTitle(index)" 
+            :order="m"
+            :componentProps="{order: m}"/>
+        </v-container>
+      </div>
     </div>
     
     <v-container v-if="id !== lastId">
@@ -100,6 +94,18 @@ export default {
     NewProject, StatusButton, DataTemplatePanel, ProcessButtonGroup, BlueButton
   },
   methods: {
+    getTitle(index) {
+      switch(index) {
+        case 0:
+          return 'SKU (Column A)';
+        case 1:
+          return 'Brand (Column B)';
+        case 2:
+          return 'Specification (Column C)';
+        default:
+          return 'Unknown';
+      }
+    },
     decreaseTurn() {
       if (this.$store.state.initialSettingValue !== 0) {
         this.$store.commit('decreaseSettingValue');
@@ -109,7 +115,7 @@ export default {
       
     },
     increaseTurn() {
-      if (this.$store.state.initialSettingValue !== 4) {
+      if (this.$store.state.initialSettingValue !== this.lastId) {
         this.$store.commit('increaseSettingValue');
       }
       const id = this.$store.state.initialSettingValue; // Get the id from initialSettingValue
