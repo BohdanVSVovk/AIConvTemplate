@@ -7,7 +7,7 @@
           <v-toolbar-title bold>{{ title }}</v-toolbar-title>
         </v-toolbar>
           <div>
-            <component :is="dynamicComponent"></component>
+            <component :is="dynamicComponent" v-bind="componentProps"></component>
           </div>
           <v-spacer></v-spacer>
       </v-card>
@@ -23,6 +23,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    componentProps: {   // Add this
+      type: Object,
+      default: () => ({}) // Always use a function when default is an object to avoid shared references.
     }
   }
 };

@@ -39,6 +39,7 @@ export default {
   },
   mounted(){
     this.fileOrder = this.$store.state.processable_data.map(item => {return item.id});
+    this.$store.commit('updateFileOrder', this.fileOrder)
   },
   methods: {
     chooseItem(item, index) {

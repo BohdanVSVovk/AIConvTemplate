@@ -23,12 +23,16 @@
         v-if="id === 1"
         :dynamicComponent="SkuMatchForm"
         title="Match SKU from Input files to Output file"
+        :order="0"
+        :componentProps="{order: 0}"
       />
       <div v-for="n in inputCounts" :key="n">
         <DataTemplatePanel
             v-if="(id) === (n + 1)"
             :dynamicComponent="InputFileOne"
             :title="'Input file ' + n" 
+            :order="n"
+            :componentProps="{order: n}"
         />
       </div>
 
@@ -38,10 +42,19 @@
         <span class="black--text display-1">Output file settings</span>
       </div>
       <v-container>
-        <DataTemplatePanel :dynamicComponent="OutputFileOne" title="Brand (Column 1)"/>
+        <DataTemplatePanel 
+        :dynamicComponent="OutputFileOne" 
+        title="Brand (Column 1)" 
+        :order="9"
+        :componentProps="{order: 9}"/>
       </v-container>
       <v-container>
-        <DataTemplatePanel :dynamicComponent="OutputFileTwo" title="MNP (Column 2)"/>
+        <DataTemplatePanel 
+        :dynamicComponent="OutputFileTwo" 
+        title="MNP (Column 2)"
+        :order="10"
+        :componentProps="{order: 10}"
+        />
       </v-container>
     </div>
     
@@ -70,7 +83,7 @@ import OutputFileTwo from "../components/dataTemplate/OutputFileTwo.vue";
 import ProcessButtonGroup from '../components/dataTemplate/ProcessButtonGroup.vue'
 import BlueButton from '../components/basic/buttons/BlueButton.vue';
 export default {
-
+  
   data () {
     return {
       id: 2,
