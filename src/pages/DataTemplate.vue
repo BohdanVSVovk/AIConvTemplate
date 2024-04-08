@@ -24,20 +24,16 @@
         :dynamicComponent="SkuMatchForm"
         title="Match SKU from Input files to Output file"
       />
-
-      <DataTemplatePanel
-        v-else-if="id === 2"
-        :dynamicComponent="InputFileOne"
-        title="Input file 1"
-      />
-
-      <DataTemplatePanel
-        v-else-if="id === 3"
-        :dynamicComponent="InputFileTwo" title="Input file 2"
-      />
+      <div v-for="n in inputCounts" :key="n">
+        <DataTemplatePanel
+            v-if="(id) === (n + 1)"
+            :dynamicComponent="InputFileOne"
+            :title="'Input file ' + n" 
+        />
+      </div>
 
     </v-container>
-    <div v-if="id === 4">
+    <div v-if="id === lastId">
       <div class="darken-2 text-xs-center">
         <span class="black--text display-1">Output file settings</span>
       </div>
@@ -49,14 +45,14 @@
       </v-container>
     </div>
     
-    <v-container v-if="id !== 4">
+    <v-container v-if="id !== lastId">
       <div class="text-xs-center">
         <span @click="decreaseTurn"><BlueButton title="Back" /></span>
         <span @click="increaseTurn"><BlueButton title="Next" /></span>
         
       </div>
     </v-container>
-    <v-container v-if="id === 4">
+    <v-container v-if="id === lastId">
       <ProcessButtonGroup />
     </v-container>
   </div>
@@ -77,14 +73,9 @@ export default {
 
   data () {
     return {
-      showSnackbar: false,
-      locationVertical: 'top',
-      locationHorizontal: null,
-      mode: '',
       id: 2,
-      timeout: 2000,
-      content: 'I\'m cool snackbar..',
-      color: 'undefined',
+      inputCounts: this.$store.state.processable_data.length,
+      lastId: 2 + this.$store.state.processable_data.length,
       SkuMatchForm,
       InputFileOne,
       InputFileTwo,
@@ -136,6 +127,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>../components/dataTemplate/InputFileOne.vue../components/dataTemplate/InputFileTwo.vue../components/dataTemplate/OutputFileOne.vue../components/dataTemplate/OutputFileTwo.vue../components/dataTemplate/KkuMatchForm.vue

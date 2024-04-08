@@ -26,7 +26,8 @@ const store = new Vuex.Store({
     selectedProject: 'Project',
     initialSettingValue: 0,
     projectLists: [],
-    processable_data:[]
+    processable_data:[],
+    fileOrderArray:[]
   },
   mutations: {
     updateProject(state, projectName) {
@@ -34,6 +35,9 @@ const store = new Vuex.Store({
     },
     updateProcessData(state, processable_data) {
       state.processable_data = processable_data;
+    },
+    updateFileOrder(state, file_order) {
+      state.fileOrderArray = file_order;
     },
     updateProjectList(state, newProjectList) {
       state.projectLists = newProjectList;
