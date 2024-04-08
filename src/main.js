@@ -25,11 +25,15 @@ const store = new Vuex.Store({
   state: {
     selectedProject: 'Project',
     initialSettingValue: 0,
-    projectLists: []
+    projectLists: [],
+    processable_data:[]
   },
   mutations: {
     updateProject(state, projectName) {
       state.selectedProject = projectName;
+    },
+    updateProcessData(state, processable_data) {
+      state.processable_data = processable_data;
     },
     updateProjectList(state, newProjectList) {
       state.projectLists = newProjectList;

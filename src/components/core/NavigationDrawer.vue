@@ -100,7 +100,6 @@ export default {
       state => state.projectLists,
       (newProjectLists) => {
         this.items = newProjectLists;
-        console.log(newProjectLists);
       }
     );
   },

@@ -14,7 +14,7 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat @click="changeRoute(utility.href, utility.routeIndex)">Go now</v-btn>
+            <v-btn flat @click="changeRoute(utility.href, utility.routeIndex, utility.id)">Go now</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -36,12 +36,12 @@ export default {
     }
   },
   methods: {
-    changeRoute(routeName, selectedIndex) {
+    changeRoute(routeName, selectedIndex, id) {
       const vm = this;
 
       vm.selectedIndex = selectedIndex;
 
-      return vm.$router.push({ name: routeName });
+      return vm.$router.push({ name: routeName, params: { id: id } });
     }
   }
 }

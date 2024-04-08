@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <table class="table">
       <thead>
         <tr>
@@ -11,17 +12,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id">
+        <tr v-for="item in items" :key="item.id" >
           <td>
-            <input type="checkbox" v-model="selected" :value="item.id">
+            <input type="checkbox" v-model="checkboxSelect" :value="item.id">
           </td>
           <td>{{ item.name }}</td>
           <td>{{ item.source }}</td>
           <td>{{ item.notes }}</td>
-          <td v-if="item.file_type == 'excel' "><img src="../assets/svgs/ExcelIcon.svg" alt="SVG Icon"></td>
+          <td v-if="item.file_type == 'excel' || '.xlsx' "><img src="../assets/svgs/ExcelIcon.svg" alt="SVG Icon"></td>
         </tr>
       </tbody>
     </table>
+    <div class="text-end">
+      <b-button @click="callApiWithSelectedIds" variant="primary">Process Selected Data</b-button>
+    </div>
   </div>
 </template>
 
@@ -29,23 +33,8 @@
 export default {
   data () {
     return {
-      selected: [], // Array to store selected row names
-      items: [
-        {
-          id: 1,
-          name: 'File Name',
-          location: 'File Name',
-          height: 'File Name',
-          base: 'File Name',
-        },
-        {
-          id: 2,
-          name: 'File Name',
-          location: 'File Name',
-          height: 'File Name',
-          base: 'File Name',
-        }
-      ]
+      checkboxSelect: [], // Array to store selected row names
+      items: []
     };
   },
   mounted() {
@@ -68,7 +57,38 @@ export default {
       .catch((error) => {
         throw new Error('Error! Could not reach the API. Status: ' + error.response.status + ', Message: ' + error.response.data.message);
       })
-  }
+  },
+  methods:{ 
+    callApiWithSelectedIds() { 
+      fetch(process.env.BACKEND_API + '/file-processing', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ selected_files: this.checkboxSelect })
+      })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(
+        (data) => {
+          // Call mutation to update processable_data
+          this.$store.commit('updateProcessData', data.data);
+          changeRoute('SelectUtility', 2)
+        }
+      )
+    } ,
+    changeRoute(routeName, selectedIndex) {
+      const vm = this;
+
+      vm.selectedIndex = selectedIndex;
+
+      return vm.$router.push({ name: routeName });
+    },
+  }, //... rest of your code }
 }
 </script>
 

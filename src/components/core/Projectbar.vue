@@ -1,127 +1,65 @@
 <template>
   <v-toolbar app>
+    <div v-if="isLoading" class="text-center">
+      <v-progress-circular
+      color="primary"
+      indeterminate
+    ></v-progress-circular>
+    </div>
     <v-toolbar-title>
       <v-toolbar-side-icon @click="toggleNavigationBar"></v-toolbar-side-icon>
       Files
     </v-toolbar-title>
 
     <v-spacer></v-spacer> <!-- Add a spacer to push buttons to the right -->
-
-    <b-button class="mr-2" variant="primary">Upload File</b-button>
-    <b-button @click="changeRoute('SelectUtility', 2)" variant="primary">Process Selected Data</b-button>
+    <div class="d-flex justify-content-center">
+      <b-button class="mr-2" v-model="file" @click="$refs.file.click()" ref="file-input" variant="primary">Upload File</b-button>
+      <input ref="file" type="file" class="d-none" v-on:change="handleFileUpload()">
+    </div>
+    <div class="d-flex justify-content-center mr-2">{{file.name}}</div>
+    
   </v-toolbar>
 </template>
 <script>
-
+import axios from "axios";
 export default {
   data() {
     return {
-      rating: null,
-      dialog: false,
-      dialogSettings: false,
-      switchEmailNotification: true,
-      showPassword: null,
-      showPasswordConfirm: null,
-      userEmail: null,
-      password: null,
-      passwordConfirm: null,
-      error: false,
-      showResult: false,
       result: '',
-      items: [
-        {
-          icon: 'account_circle',
-          href: '#',
-          title: 'Profile',
-          click: (e) => {
-          }
-        },
-        {
-          icon: 'settings',
-          href: '#',
-          title: 'Settings',
-          click: () => {
-            const vm = this;
-
-            vm.dialogSettings = true;
-          }
-        },
-        {
-          icon: 'exit_to_app',
-          href: '#',
-          title: 'Log Out',
-          click: () => {
-            const vm = this;
-
-            vm.$router.push({ name: 'Login' });
-          }
-        }
-      ],
-      notifications:
-      [
-        {
-          title: 'New mail from Adam Joe',
-          color: 'light-blue',
-          icon: 'email',
-          actionAt: '12 min ago',
-          isActive: true,
-          onClick: () => {
-            const vm = this;
-
-            vm.$router.push({ name: 'Mailbox' });
-          }
-        },
-        {
-          title: 'Scheculed meeting',
-          color: 'red',
-          icon: 'calendar_today',
-          actionAt: '46 min ago',
-          isActive: true,
-          onClick: () => {
-            const vm = this;
-
-            vm.$router.push({ name: 'Calendar' });
-          }
-        },
-        {
-          title: 'New mail from Github',
-          color: 'light-blue',
-          icon: 'email',
-          isActive: true,
-          timeLabel: '2 hour ago',
-          onClick: () => {
-            const vm = this;
-
-            vm.$router.push({ name: 'Mailbox' });
-          }
-        }
-      ],
-      languages: [
-        { name: 'English', languageCode: 'en', path: require('../../assets/flags/en.png') },
-        { name: 'Turkish', languageCode: 'tr', path: require('../../assets/flags/tr.png') },
-        { name: 'French', languageCode: 'fr', path: require('../../assets/flags/fr.png') },
-        { name: 'German', languageCode: 'de', path: require('../../assets/flags/de.png') },
-        { name: 'Japanese', languageCode: 'ja', path: require('../../assets/flags/ja.png') },
-        { name: 'Simplified Chinese', languageCode: 'ch', path: require('../../assets/flags/ch.png') }
-      ]
+      file: "",
+      isLoading: false // Ensure this line is present
     }
   },
 
   computed: {
-    selectedLanguageFlag() {
-      const vm = this;
-
-      switch(vm.$i18n.locale) {
-        case 'en': return require('../../assets/flags/en.png');
-        case 'tr': return require('../../assets/flags/tr.png');
-        case 'fr': return require('../../assets/flags/fr.png');
-        case 'de': return require('../../assets/flags/de.png');
-        case 'ja': return require('../../assets/flags/ja.png');
-        case 'ch': return require('../../assets/flags/ch.png');
-      }
-    }
   },
   methods: {
+    handleFileUpload: function () {
+      this.file = this.$refs.file.files[0];
+      this.isLoading = true;
+      let formData = new FormData();
+      formData.append('file', this.file);
+      formData.append('projectId', this.$route.params.id)
+      axios.post(process.env.BACKEND_API + '/file-upload', formData)
+        .then(response => {
+          return response.data;
+          // location.reload();
+          // let currentPath = this.$router.currentRoute.fullPath;
+          // this.$router.push({ path: "/" }).then(() => this.$router.push(currentPath));
+          // Here you can change route after successful upload
+          // this.changeRoute('YourRouteName', routeIndex);
+        })
+        .then((data) => {
+          this.isLoading = false;
+          location.reload()
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    clearFiles() {
+        this.$refs['file-input'].reset()
+      },
     toggleNavigationBar() {
       const vm = this;
 
@@ -135,41 +73,6 @@ export default {
 
       return vm.$router.push({ name: routeName });
     },
-
-    setUpSettings() {
-      const vm = this;
-
-      if (vm.userEmail === null || vm.password === null || vm.passwordConfirm === null) {
-
-        vm.result = "Email and Password can't be null.";
-        vm.showResult = true;
-
-        return;
-      }
-
-      if (vm.password !== vm.passwordConfirm) {
-
-        vm.error = true;
-        vm.result = "Passwords does not match the confirm password.";
-        vm.showResult = true;
-
-        return;
-      }
-
-      vm.$root.userEmail = vm.userEmail;
-      vm.$root.userPassword = vm.password;
-
-      vm.result = "Email and password changed succesfully.";
-      vm.showResult = true;
-
-      vm.dialogSettings = false;
-    },
-
-    selectLanguage(code) {
-      const vm = this;
-
-      vm.$root.setLanguage(code);
-    }
   }
 };
 </script>
