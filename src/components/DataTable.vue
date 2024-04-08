@@ -77,7 +77,7 @@ export default {
         (data) => {
           // Call mutation to update processable_data
           this.$store.commit('updateProcessData', data.data);
-          changeRoute('SelectUtility', 2)
+          this.changeRoute('SelectUtility', 2)
         }
       )
     } ,

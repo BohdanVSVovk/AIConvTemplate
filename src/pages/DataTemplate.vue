@@ -15,29 +15,29 @@
     <div class="darken-2 text-xs-center">
       <span class="black--text display-1">Data Template Utility</span>
     </div>
-    <div class="darken-2 text-xs-center" v-if="id !== 3">
+    <div class="darken-2 text-xs-center" v-if="id !== 4">
       <span class="black--text display-1">Input file settings</span>
     </div>
     <v-container>
       <DataTemplatePanel
-        v-if="id === 0"
+        v-if="id === 1"
         :dynamicComponent="SkuMatchForm"
         title="Match SKU from Input files to Output file"
       />
 
       <DataTemplatePanel
-        v-else-if="id === 1"
+        v-else-if="id === 2"
         :dynamicComponent="InputFileOne"
         title="Input file 1"
       />
 
       <DataTemplatePanel
-        v-else-if="id === 2"
+        v-else-if="id === 3"
         :dynamicComponent="InputFileTwo" title="Input file 2"
       />
 
     </v-container>
-    <div v-if="id === 3">
+    <div v-if="id === 4">
       <div class="darken-2 text-xs-center">
         <span class="black--text display-1">Output file settings</span>
       </div>
@@ -49,14 +49,14 @@
       </v-container>
     </div>
     
-    <v-container v-if="id !== 3">
+    <v-container v-if="id !== 4">
       <div class="text-xs-center">
         <span @click="decreaseTurn"><BlueButton title="Back" /></span>
         <span @click="increaseTurn"><BlueButton title="Next" /></span>
         
       </div>
     </v-container>
-    <v-container v-if="id === 3">
+    <v-container v-if="id === 4">
       <ProcessButtonGroup />
     </v-container>
   </div>
@@ -105,7 +105,7 @@ export default {
       
     },
     increaseTurn() {
-      if (this.$store.state.initialSettingValue !== 3) {
+      if (this.$store.state.initialSettingValue !== 4) {
         this.$store.commit('increaseSettingValue');
       }
       const id = this.$store.state.initialSettingValue; // Get the id from initialSettingValue
