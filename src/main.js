@@ -28,7 +28,8 @@ const store = new Vuex.Store({
     projectLists: [],
     processable_data:[],
     fileOrderArray:[],
-    inputSettings:[]
+    inputSettings:[],
+    columnPromptSetting:[]
   },
   mutations: {
     updateProject(state, projectName) {
@@ -42,6 +43,12 @@ const store = new Vuex.Store({
     },
     updateProjectList(state, newProjectList) {
       state.projectLists = newProjectList;
+    },
+    updateColumnPromptSetting(state, payload) {
+      let newColumnList = state.columnPromptSetting
+      newColumnList[payload.order - 1] = payload.prompt
+      state.columnPromptSetting = newColumnList;
+      console.log(state.columnPromptSetting)
     },
     updateInputSettings(state, inputSettings) {
       let index = state.inputSettings.findIndex(item => item.order === inputSettings.order);
